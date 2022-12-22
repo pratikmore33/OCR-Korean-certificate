@@ -16,10 +16,15 @@ def parse_image(file):
     nparr = np.fromstring(file, np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-    gray = cv2.medianBlur(gray, 3)
+    # gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    # gray = cv2.medianBlur(gray, 3)
     filename = "{}.png".format("temp")
     cv2.imwrite(filename, gray)
-    text = pytesseract.image_to_string(Image.open(filename))
+
+    # set kor language for tesseract from ./tessdata/kor.traineddata
+    
+
+    # detect language korean
+    text = pytesseract.image_to_string(Image.open(filename), lang='kor')
     os.remove(filename)
     return text
