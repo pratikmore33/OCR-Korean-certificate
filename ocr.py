@@ -20,10 +20,6 @@ def parse_image(file):
     # gray = cv2.medianBlur(gray, 3)
     filename = "{}.png".format("temp")
     cv2.imwrite(filename, gray)
-
-    # set kor language for tesseract from ./tessdata/kor.traineddata
-    
-
     # detect language korean
     text = pytesseract.image_to_string(Image.open(filename), lang='kor')
     os.remove(filename)
