@@ -3,6 +3,8 @@ import pytesseract
 import os
 from PIL import Image
 import numpy as np
+import skew
+import func
 
 
 def parse_image(file):
@@ -13,14 +15,15 @@ def parse_image(file):
     Returns
     :text: str, converted text from image
     """
-    nparr = np.fromstring(file, np.uint8)
-    image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #nparr = np.fromstring(file, np.uint8)
+    #image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
     # gray = cv2.medianBlur(gray, 3)
-    filename = "{}.png".format("temp")
-    cv2.imwrite(filename, gray)
+    #filename = "{}.png".format("temp")
+    #v2.imwrite(filename, gray)
     # detect language korean
-    text = pytesseract.image_to_string(Image.open(filename), lang='kor')
-    os.remove(filename)
-    return text
+    #text = pytesseract.image_to_string(Image.open(filename), lang='kor')
+    #os.remove(filename)
+    img2 = skew.skew_correct(file)
+    return func.reg_pattern(img2)
