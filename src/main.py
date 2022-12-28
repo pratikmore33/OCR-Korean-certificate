@@ -13,6 +13,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://main.d3ryybtow4oo9w.amplifyapp.com"
 ]
 
 app.add_middleware(
@@ -41,7 +42,7 @@ async def ocr(file: UploadFile = File(...)):
             buffer.write(contents)
 
         # get file url
-        file_url = f"http://localhost:8000/static/{file.filename}"
+        file_url = f"https://apinexsol.code-d.io/static/{file.filename}"
 
         # check if business registration form
         if "등록번호" in result:
@@ -60,7 +61,7 @@ def parse_business_registration_form(text):
         t1 = 'None'
     else:
         p1 = re.search(r'(등록번호)',text)
-        t1= text[p1.end():p1.end()+16]
+        t1= text[p1.end():p1.end()+15]
 
     
     # date of birth
