@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ -z "$DOMAIN" ]
 then
     # If DOMAIN is blank, set to localhost

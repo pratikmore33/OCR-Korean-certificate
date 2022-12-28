@@ -1,5 +1,16 @@
-{$DOMAIN} {
-    reverse_proxy {$PROXY_BACKEND}:{$PROXY_PORT}  {
-      header_down Strict-Transport-Security max-age=31536000;
+https://apinexsol.code-d.io {
+    @options {
+        method OPTIONS
     }
+    header {
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Credentials true
+        Access-Control-Allow-Methods *
+        Access-Control-Allow-Headers *
+        defer
+    }
+    reverse_proxy {$PROXY_BACKEND}:{$PROXY_PORT}  {
+        header_down -Access-Control-Allow-Origin
+    }
+    respond @options 204
   }
